@@ -43,7 +43,7 @@ SECRET_KEY = '<insert here your own key>'
 
 # FAS group for the nuancier admin
 #ADMIN_GROUP = 'sysadmin-nuancier'
-ADMIN_GROUP = ('infrastructure', 'rocky')
+ADMIN_GROUP = ('infrastructure', 'web')
 
 # FAS group for the nuancier reviewers
 REVIEW_GROUP = ('designteam')
