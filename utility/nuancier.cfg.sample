@@ -22,7 +22,7 @@ DB_URL='sqlite:////var/tmp/nuancier_lite.sqlite'
 ### The FAS groups in which the admin of nuancier are
 ### This can either be a single group or multiple, defined between
 ### parenthesis.
-ADMIN_GROUP=('sysadmin-nuancier', 'sysadmin-main')
+ADMIN_GROUP=('rocky')
 
 ### Pictures folder
 ### The folder in which are located the pictures of the different elections.

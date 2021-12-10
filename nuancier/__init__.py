@@ -126,7 +126,7 @@ def is_nuancier_admin(user):
     '''
     if not user:
         return False
-    if not user.cla_done or len(user.groups) < 1:
+    if len(user.groups) < 1:
         return False
 
     admins = APP.config['ADMIN_GROUP']
@@ -143,7 +143,7 @@ def is_nuancier_reviewer(user):
     '''
     if not user:
         return False
-    if not user.cla_done or len(user.groups) < 1:
+    if len(user.groups) < 1:
         return False
 
     reviewers = APP.config['REVIEW_GROUP']
@@ -160,7 +160,7 @@ def has_weigthed_vote(user):
     '''
     if not user:  # pragma: no cover
         return False
-    if not user.cla_done or len(user.groups) < 1:  # pragma: no cover
+    if len(user.groups) < 1:  # pragma: no cover
         return False
 
     voters = APP.config['WEIGHTED_GROUP']
@@ -186,10 +186,10 @@ def fas_login_required(function):
         if not hasattr(flask.g, 'fas_user') or flask.g.fas_user is None:
             return flask.redirect(flask.url_for('.login',
                                                 next=flask.request.url))
-        elif not flask.g.fas_user.cla_done:
-            flask.flash('You must sign the CLA (Contributor License '
-                        'Agreement to use nuancier', 'error')
-            return flask.redirect(flask.url_for('index'))
+        #elif not flask.g.fas_user.cla_done:
+        #    flask.flash('You must sign the CLA (Contributor License '
+        #                'Agreement to use nuancier', 'error')
+        #    return flask.redirect(flask.url_for('index'))
         return function(*args, **kwargs)
     return decorated_function
 
@@ -207,10 +207,10 @@ def contributor_required(function):
         if not hasattr(flask.g, 'fas_user') or flask.g.fas_user is None:
             return flask.redirect(flask.url_for('.login',
                                                 next=flask.request.url))
-        elif not flask.g.fas_user.cla_done:
-            flask.flash('You must sign the CLA (Contributor License '
-                        'Agreement to use nuancier', 'error')
-            return flask.redirect(flask.url_for('index'))
+        #elif not flask.g.fas_user.cla_done:
+        #    flask.flash('You must sign the CLA (Contributor License '
+        #                'Agreement to use nuancier', 'error')
+        #    return flask.redirect(flask.url_for('index'))
         elif len(flask.g.fas_user.groups) == 0:
             flask.flash('You must be in one more group than the CLA',
                         'error')
@@ -231,10 +231,10 @@ def nuancier_admin_required(function):
         if not hasattr(flask.g, 'fas_user') or flask.g.fas_user is None:
             return flask.redirect(flask.url_for('.login',
                                                 next=flask.request.url))
-        elif not flask.g.fas_user.cla_done:
-            flask.flash('You must sign the CLA (Contributor License '
-                        'Agreement to use nuancier', 'error')
-            return flask.redirect(flask.url_for('index'))
+        #elif not flask.g.fas_user.cla_done:
+        #    flask.flash('You must sign the CLA (Contributor License '
+        #                'Agreement to use nuancier', 'error')
+        #    return flask.redirect(flask.url_for('index'))
         elif len(flask.g.fas_user.groups) == 0:
             flask.flash(
                 'You must be in one more group than the CLA', 'error')

@@ -43,7 +43,7 @@ SECRET_KEY = '<insert here your own key>'
 
 # FAS group for the nuancier admin
 #ADMIN_GROUP = 'sysadmin-nuancier'
-ADMIN_GROUP = ('sysadmin-main', 'sysadmin-nuancier')
+ADMIN_GROUP = ('infrastructure', 'rocky')
 
 # FAS group for the nuancier reviewers
 REVIEW_GROUP = ('designteam')
@@ -94,3 +94,8 @@ NUANCIER_EMAIL_ERROR_TO = 'pingou@pingoured.fr'
 
 FEDMENU_URL = 'https://apps.fedoraproject.org/fedmenu'
 FEDMENU_DATA_URL = 'https://apps.fedoraproject.org/js/data.js'
+
+FAS_OPENID_ENDPOINT = "https://accounts.rockylinux.org/idp/openid/"
+FAS_CHECK_CERT      = True
+FLASK_FAS_OPENID_RETURN_URL = "http://localhost:5000/"
+
