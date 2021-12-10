@@ -5,7 +5,7 @@ blinker # required by flask for tests
 dogpile.cache
 flask
 flask-wtf
-Pillow
+Pillow<7
 python-fedora >= 0.3.33
 python-openid
 python-openid-cla
@@ -13,3 +13,4 @@ python-openid-teams
 six
 SQLAlchemy>=0.6
 wtforms
+werkzeug<1.0.0
