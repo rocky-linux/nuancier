@@ -14,7 +14,9 @@
     <link rel="stylesheet" type="text/css" media="screen"
         href="{{ url_for('static', filename='nuancier.css') }}"/>
     <link rel='stylesheet' type='text/css'
-         href='//fonts.googleapis.com/css?family=Comfortaa'/>
+         href='//fonts.googleapis.com/css2?family=Red+Hat+Display'/>
+    <link rel='stylesheet' type='text/css'
+         href='////fonts.googleapis.com/css2?family=Red+Hat+Text'/>
 
   </head>
   <body id="{%block tag %}{% endblock %}">
@@ -100,16 +102,6 @@
     {% block jscripts %}
       <script language="javascript" type="text/javascript"
         src="{{ url_for('static', filename='jquery.js') }}"></script>
-      {% if config['FEDMENU_URL'] %}
-      <script src="{{ config['FEDMENU_URL'] }}/js/fedmenu.js"></script>
-      <script>
-        fedmenu({
-            'url': '{{ config["FEDMENU_DATA_URL"] }}',
-            'mimeType': 'application/javascript',
-            'position': 'bottom-right',
-        });
-      </script>
-      {% endif %}
 
     {% endblock %}
 
