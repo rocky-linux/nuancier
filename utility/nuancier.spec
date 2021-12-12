@@ -1,8 +1,10 @@
 %{!?python_sitelib: %global python_sitelib %(%{__python} -c "from
 %distutils.sysconfig import get_python_lib; print (get_python_lib())")}
 
+%define __python %__python2
+
 Name:           nuancier
-Version:        0.11.0
+Version:        0.11.1
 Release:        1%{?dist}
 Summary:        A web-based voting application for wallpapers
 
@@ -13,38 +15,18 @@ Source0:        https://fedorahosted.org/releases/n/u/nuancier/%{name}-%{version
 BuildArch:      noarch
 
 BuildRequires:  python2-devel
-BuildRequires:  python-flask
-BuildRequires:  python-wtforms
-BuildRequires:  python-flask-wtf
-BuildRequires:  python-fedora >= 0.3.33
-BuildRequires:  python-fedora-flask >= 0.3.33
-BuildRequires:  python-setuptools
-BuildRequires:  python-dogpile-cache
-BuildRequires:  python-nose
-BuildRequires:  python-coverage
-BuildRequires:  python-six
+BuildRequires:  python2-setuptools
+BuildRequires:  python2-pip
+BuildRequires:  python2-nose
+BuildRequires:  python2-coverage
+BuildRequires:  python2-six
 
-# EPEL6
-%if ( 0%{?rhel} && 0%{?rhel} == 6 )
-BuildRequires:  python-sqlalchemy0.7
-BuildRequires:  python-imaging
-Requires:  python-sqlalchemy0.7
-Requires:  python-imaging
-%else
-BuildRequires:  python-sqlalchemy > 0.5
-BuildRequires:  python-pillow
-Requires:  python-sqlalchemy > 0.5
-Requires:  python-pillow
-%endif
+BuildRequires:  python2-sqlalchemy > 0.5
 
-Requires:  python-flask
-Requires:  python-wtforms
-Requires:  python-flask-wtf
-Requires:  python-fedora >= 0.3.32.3-3
-Requires:  python-fedora-flask
-Requires:  python-dogpile-cache
-Requires:  python-setuptools
-Requires:  python-six
+Requires:  python2-sqlalchemy > 0.5
+
+Requires:  python2-setuptools
+Requires:  python2-six
 Requires:  fedmsg
 Requires:  mod_wsgi
 
@@ -56,6 +38,7 @@ wallpapers that are included in Fedora at each release.
 %setup -q
 
 %build
+%{__python} -m pip install -r requirements.txt
 %{__python} setup.py build
 
 %install
