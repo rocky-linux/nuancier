@@ -39,17 +39,17 @@ WTF_CSRF_TIME_LIMIT = 3600
 DB_URL = 'sqlite:////var/tmp/nuancier_lite.sqlite'
 
 # secret key used to generate unique csrf token
-SECRET_KEY = '<insert here your own key>'
+SECRET_KEY = 'W0CCj4wH01Ajltz5TMzKAxgaz4CDiTFy'
 
 # FAS group for the nuancier admin
 #ADMIN_GROUP = 'sysadmin-nuancier'
-ADMIN_GROUP = ('infrastructure', 'web')
+ADMIN_GROUP = ('infrastructure', 'web', 'rocky')
 
 # FAS group for the nuancier reviewers
-REVIEW_GROUP = ('designteam')
+REVIEW_GROUP = ('web')
 
 # FAS group of users having a higher vote
-WEIGHTED_GROUP = ('sysadmin-nuancier', 'designteam')
+WEIGHTED_GROUP = ('rocky', 'web')
 
 # Pictures folder
 PICTURE_FOLDER = os.path.join(os.path.dirname(__file__), '..', 'pictures')
@@ -86,16 +86,17 @@ MAX_CONTENT_LENGTH = 16 * 1024 * 1024
 # submission is rejected.
 NUANCIER_EMAIL_NOTIFICATIONS = False
 # The email address that the notifications are sent from
-NUANCIER_EMAIL_FROM = 'nobody@fedoraproject.org'
+NUANCIER_EMAIL_FROM = 'nobody@rockylinux.org'
 # The smtp server to use to send the notifications
 NUANCIER_EMAIL_SMTP_SERVER = 'localhost'
 # The email address to send error report to
-NUANCIER_EMAIL_ERROR_TO = 'pingou@pingoured.fr'
+NUANCIER_EMAIL_ERROR_TO = 'neil@resf.org'
 
 FEDMENU_URL = 'https://apps.fedoraproject.org/fedmenu'
 FEDMENU_DATA_URL = 'https://apps.fedoraproject.org/js/data.js'
 
 FAS_OPENID_ENDPOINT = "https://accounts.rockylinux.org/idp/openid/"
 FAS_CHECK_CERT      = True
-FLASK_FAS_OPENID_RETURN_URL = "http://localhost:5000/"
+FLASK_FAS_OPENID_RETURN_URL = "https://vote.rockylinux.org/"
+FAS_OPENID_RETURN_URL = "https://vote.rockylinux.org/"
 
