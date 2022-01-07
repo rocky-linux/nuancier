@@ -51,6 +51,9 @@ REVIEW_GROUP = ('designteam')
 # FAS group of users having a higher vote
 WEIGHTED_GROUP = ('sysadmin-nuancier', 'designteam')
 
+# FAS group for the contributor agreement(s)
+CONTRIBUTOR_GROUP = ('signed_fpca')
+
 # Pictures folder
 PICTURE_FOLDER = os.path.join(os.path.dirname(__file__), '..', 'pictures')
 

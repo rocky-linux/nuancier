@@ -174,6 +174,19 @@ def has_weigthed_vote(user):
 
     return len(set(user.groups).intersection(voters)) > 0
 
+def signed_contributor_agreement(groups):
+    ''' Has the user signed the contributor agreement required.
+    '''
+    if len(groups) < 1:  # pragma: no cover
+        return False
+
+    contributor_group = APP.config['CONTRIBUTOR_GROUP']
+    if isinstance(contributor_group, six.string_types):  # pragma: no cover
+        contributor_group = set([contributor_group])
+    else:  # pragma: no cover
+        contributor_group = set(contributor_group)
+    
+    return len(set(groups).intersection(contributor_group)) >= len(contributor_group)
 
 def fas_login_required(function):
     ''' Flask decorator to ensure that the user is logged in against FAS.
@@ -356,7 +369,7 @@ def set_session():
                     "username": OIDC.user_getfield("nickname"),
                     "email": OIDC.user_getfield("email") or "",
                     "timezone": OIDC.user_getfield("zoneinfo"),
-                    "cla_done": "signed_fpca" in (OIDC.user_getfield("groups") or []),
+                    "cla_done": signed_contributor_agreement(OIDC.user_getfield("groups") or []),
                     'groups': OIDC.user_getfield('groups'),
                 }
             )
