@@ -100,3 +100,16 @@ FEDMENU_DATA_URL = 'https://apps.fedoraproject.org/js/data.js'
 
 OIDC_CLIENT_SECRETS = 'client_secrets.json'
 OIDC_SCOPES = ['openid', 'email', 'profile', 'https://id.fedoraproject.org/scope/groups', 'https://id.fedoraproject.org/scope/agreements']
+
+''' Override / add mappings
+    OIDC_MAPPED_FIELDS = {
+        'username': 'name',
+        'cla_done': ('signed_agreement', 'agreement_2') # Always passed into signed_contributor_agreement(), defaults to require all groups
+        'groups': 'groups'
+    }
+    Setup arbitrary transforms w/ lambda function, e.g., to replace/strip characters
+    OIDC_FIELD_TRANSFORMS = {
+        'group': lambda groups: [g.lstrip('/') for g in groups]
+        'cla_done': True # can just be a value, in which case it simply is set to that value always.
+    }
+'''

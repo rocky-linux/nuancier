@@ -364,15 +364,29 @@ def set_session():
     flask.session.permanent = True
     if OIDC.user_loggedin:
         if not hasattr(flask.session, "fas_user") or not flask.session.fas_user:
-            flask.session.fas_user = munch.Munch(
-                {
-                    "username": OIDC.user_getfield("nickname"),
-                    "email": OIDC.user_getfield("email") or "",
-                    "timezone": OIDC.user_getfield("zoneinfo"),
-                    "cla_done": signed_contributor_agreement(OIDC.user_getfield("groups") or []),
-                    'groups': OIDC.user_getfield('groups'),
-                }
-            )
+            userdata   = {}
+            transforms = dict(cla_done=signed_contributor_agreement, **APP.config['OIDC_FIELD_TRANSFORMS']) # Config file overrides any configured defaults
+            fields     = dict(username='nickname', email='email', timezone='zoneinfo', cla_done='signed_fpca', groups='groups',
+                    **APP.config['OIDC_MAPPED_FIELDS'])
+
+            for field in APP.config['OIDC_MAPPED_FIELDS']:
+                value = fields.get(field)
+                userdata[field] = OIDC.get_field(value)
+
+                # Transform the userdata, if needed
+                if field in transforms:
+                    transform = transforms.get(field)
+                    if callable(transform):
+                        userdata[field] = transform(userdata[field])
+                    else:
+                        userdata[field] = transform
+
+            if userdata:
+                flask.session.fas_user = munch.Munch(userdata)
+            else:
+                LOG.error('Unable to map and transform OIDC fields to user data', userdata)
+                return 'OIDC User mapping failed. Consult logs or contact an administrator', 503
+
         flask.g.fas_user = flask.session.fas_user
 
     else:
